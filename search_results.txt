@@ -1,0 +1,3 @@
+Search results (sample, *.pdf):
+/Users/zenpao/MEGAsync/Projects/python/[TUT]Intermediate Python Programming Essentials/Tutorial/Day 2 [f_string].pdf
+/Users/zenpao/MEGAsync/Projects/python/Python-Script-Collection/SearchFileDocument/sample.pdf

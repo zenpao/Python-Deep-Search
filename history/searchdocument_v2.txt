@@ -1,0 +1,60 @@
+import os
+import fnmatch
+import sys
+
+def search_files(root, pattern, content):
+    matches = []
+
+    total_files = 0
+    processed_files = 0
+
+    # Count the total number of files
+    for path, dirs, files in os.walk(root):
+        total_files += len(files)
+
+    # Search for files and update progress
+    for path, dirs, files in os.walk(root):
+        for filename in fnmatch.filter(files, pattern):
+            file_path = os.path.join(path, filename)
+
+            # Check if content exists in file name or file content
+            if content.lower() in filename.lower() or contains_content(file_path, content.lower()):
+                matches.append(file_path)
+                print(file_path)  # Print file path as soon as a match is found
+
+            processed_files += 1
+            progress = int(processed_files / total_files * 100)
+            sys.stdout.write(f"\rProgress: {progress}%")
+            sys.stdout.flush()
+
+    return matches
+
+
+def contains_content(file_path, content):
+    with open(file_path, 'r') as file:
+        file_content = file.read().lower()
+        if content in file_content:
+            return True
+    return False
+
+
+# Prompt user for directory
+directory = input("Enter the directory to search in: ")
+
+# Prompt user for file pattern
+file_pattern = input("Enter the file pattern or extension (e.g., *.txt, *.html): ")
+
+# Example usage
+search_content = input("Enter the content you want to search for: ")
+
+results = search_files(directory, file_pattern, search_content)
+
+if results:
+    print("\nSearch completed. Files containing the specified content or matching file name:")
+    for file_path in results:
+        print(file_path)
+else:
+    print("\nNo matching files found.")
+
+# Prompt user to press any key to continue
+input("Press any key to continue...")
