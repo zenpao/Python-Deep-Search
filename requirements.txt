@@ -1,0 +1,4 @@
+beautifulsoup4==4.8.2
+bs4==0.0.2
+pypdf2==3.0.1
+textract==1.6.5
